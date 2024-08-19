@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 This module contains a function that returns a tuple containing start
-index and end index corresponding to range of indexes to return in a 
+index and end index corresponding to range of indexes to return in a
 list
 
 It also contains a class definition for Server
@@ -11,7 +11,6 @@ It also contains a class definition for Server
 import csv
 import math
 from typing import List
-
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -48,8 +47,8 @@ class Server:
         """
         Returns a subset of list data to emulate pagination
         """
-        assert page > 0 and type(page) == int, "Page must be greater than 0"
-        assert type(page_size) == int
+        assert page > 0 and type(page) is int, "Page must be greater than 0"
+        assert type(page_size) is int
         assert page_size > 0, "Page size must be greater than 0"
 
         index_rng = index_range(page, page_size)
