@@ -1,0 +1,1 @@
+### This folder contains projects and scripts to implement pagination using different mechanisms
