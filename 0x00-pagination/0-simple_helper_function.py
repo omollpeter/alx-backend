@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-This module contains a function that returns a tuple containing start index
-and end index corresponding to range of indexes to return in a list
+This module contains a function that returns a tuple containing start
+index and end index corresponding to range of indexes to return in a 
+list
 """
 
 
