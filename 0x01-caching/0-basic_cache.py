@@ -13,7 +13,7 @@ class BasicCache(BaseCaching):
         Initializes instance attributes
         """
         super().__init__()
-    
+
     def put(self, key, item):
         """
         For inserting values to dict like cache
