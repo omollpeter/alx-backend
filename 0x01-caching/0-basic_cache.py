@@ -8,6 +8,10 @@ BaseCaching = __import__("base_caching").BaseCaching
 
 
 class BasicCache(BaseCaching):
+    """
+    Defines BasicCache class
+    """
+
     def __init__(self):
         """
         Initializes instance attributes
