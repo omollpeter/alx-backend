@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-This module contains FIFOCache class that inherits from BaseCaching
-The class defines implementation for FIFO caching replacement policy
+This module contains LIFOCache class that inherits from BaseCaching
+The class defines implementation for LIFO caching replacement policy
 """
 
 
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """
-    Defines FIFOCache class
+    Defines LIFOCache class
     """
 
     def __init__(self):
@@ -28,15 +28,14 @@ class FIFOCache(BaseCaching):
         if key and item:
             if key in self.cache_data.keys():
                 idx = self.trkr.index(key)
-                self.trkr.remove(key)
-                self.trkr.append(key)
+                self.trkr[idx], self.trkr[3] = self.trkr[3], self.trkr[idx]
                 self.cache_data[key] = item
                 return
             if len(self.cache_data) < self.MAX_ITEMS:
                 self.trkr.append(key)
                 self.cache_data[key] = item
             else:
-                discard = self.trkr.pop(0)
+                discard = self.trkr.pop(3)
                 print("DISCARD:", discard)
                 del self.cache_data[discard]
 
