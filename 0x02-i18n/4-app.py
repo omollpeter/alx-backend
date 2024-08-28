@@ -23,6 +23,7 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
+
 @babel.localeselector
 def get_locale():
     """
@@ -52,5 +53,5 @@ def index():
     return render_template("4-index.html")
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
