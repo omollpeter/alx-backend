@@ -6,6 +6,7 @@ Contains a basic Flask app with a single route
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+import pytz
 
 
 class Config:
@@ -21,10 +22,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 
-babel = Babel(app)
+# babel = Babel(app)
 
 
-@babel.localeselector
+# @babel.localeselector
 def get_locale():
     """
     Matches the best language to be used in the application
@@ -37,7 +38,24 @@ def get_locale():
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-# babel = Babel(app, locale_selector=get_locale)
+def get_timezone():
+    """
+    Matches the best language to be used in the application
+    """
+    try:
+        if "timezone" in request.args:
+            timezone = pytz.timezone(request.args.get("timezone"))
+        elif g.user:
+            timezone = pytz.timezone(g.user["timezone"])
+        else:
+            timezone = pytz.timezone(app.config["BABEL_DEFAULT_TIMEZONE"])
+    except pytz.exceptions.UnknownTimeZoneError:
+        timezone = pytz.timezone(app.config["BABEL_DEFAULT_TIMEZONE"])
+    finally:
+        return timezone
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 
 @app.context_processor
@@ -45,7 +63,7 @@ def inject_locale():
     """
     Injects get_locale function into template context
     """
-    return dict(get_locale=get_locale)
+    return dict(get_locale=get_locale, get_timezone=get_timezone)
 
 
 users = {
@@ -81,8 +99,8 @@ def index():
     """
     View function for the the index page
     """
-    return render_template("6-index.html")
+    return render_template("7-index.html")
 
 
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run()
